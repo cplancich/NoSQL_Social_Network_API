@@ -3,24 +3,35 @@ const { Schema, model } = require('mongoose');
 const userSchema = new Schema(
     {
       username: { type:String, unique: true, required: true, trim: true},
-      last: String,
-      age: Number,
-      applications: [
+      email: { type:String, required: true, unique: true  },
+    //   TODO: add email validation
+      thoughts: [
         {
           type: Schema.Types.ObjectId,
-          ref: 'Application',
+          ref: 'Thought',
+        },
+      ],
+      friends: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
         },
       ],
     },
     {
       toJSON: {
         virtuals: true,
-      },
-      id: false,
+      }
     }
   );
 
+  userSchema
+    .virtual('friendCount')
+    .get(function (){
+        return this.friends.length
+    });
 
-  const User = model('user', userSchema);
+
+  const User = model('User', userSchema);
 
   module.exports = User;
