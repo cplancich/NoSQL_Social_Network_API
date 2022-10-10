@@ -1,5 +1,3 @@
-// TODO: Update all that
-
 const { Thought, User } = require('../models');
 
 module.exports = {

@@ -1,5 +1,3 @@
-// TODO: rephrase everything
-
 const router = require('express').Router();
 const {
   getThoughts,
